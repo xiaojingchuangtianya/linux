@@ -1,0 +1,24 @@
+ul.blog_type,li{
+    list-style-type: none;
+}
+div.blog_content:not(:last-child){
+    border-bottom:1px solid #bce8f1;
+}
+div.blog_content h4{
+    margin-top: 0.5em;
+}
+li.author,li.type{
+text-align: right;
+}
+nav.page_center{
+    text-align: center;
+}
+li.read_title{
+    font-size: 1.5em;
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+}
+li.read_num{
+    padding-top:10px;
+}

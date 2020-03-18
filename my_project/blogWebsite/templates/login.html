@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!自适应布局>
+    <script type="text/javascript" src="{%static 'jquery.min.js'%}"></script>
+    <link rel="stylesheet" href="{%static 'bootstrap/css/bootstrap.min.css'%}">
+    <script type="text/javascript" src="{%static 'js/heart.js'%}"></script>
+    <script type="text/javascript" src="{%static 'bootstrap/js/bootstrap.min.js'%}"></script>
+    <link rel="stylesheet" href="{% static 'css/login.css'%}">
+</head>
+
+<body style="background:url('{%static 'picture/background.jpg' %}') no-repeat;">
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-xs-3">
+    </div>
+
+    <div class="col-md-5 col-md-6 col-xs-6" style="background: url('{%static 'picture/login.jpg' %}');margin-top: 100px">
+        <form action="./deal_login" method="post" class="text-center my_center">
+                {% csrf_token %}<!添加令牌>
+                <p>账号：<input type="text" name="user" placeholder="请输入你的账号"></p>
+                <p>密码：<input type="password" name="password" placeholder="请输入密码"></p>
+                <p><input type="submit" value="登录"> <a href="./register" class="register-right">去注册</a> </p>
+        </form>
+    </div>
+</div>
+</div>
+
+</body>
+</html>

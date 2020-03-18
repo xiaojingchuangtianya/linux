@@ -1,0 +1,123 @@
+{% extends "base_extend.html"%}
+{%load staticfiles%}
+{% block title %}
+博客目录
+{% endblock %}
+{%block quote_js%}
+    <link rel="stylesheet" href="{% static 'blogWebsite/blog_list.css'%}">
+{%endblock%}
+{% block span %}
+<li><a href="../shop">闲置网站</a></li>
+<li class="active"><a>博客目录</a></li>
+{% endblock %}
+
+{%block search%}
+<form class="navbar-form navbar-left" role="search">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Search">
+  </div>
+  <button type="submit" class="btn btn-default">搜索</button>
+</form>
+     {% if user.is_authenticated %}
+    <li class="top-right"><a>{{user}},你好！</a></li>
+     <li class="top-right" ><a href="logout">退出</a></li>
+    {% else%}
+    <li class="top-right 11"><a href="./login">登录/注册</a></li><!到时放在最右边，用于显示登录这些状态>
+    {%endif%}
+    {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-lg-9 col-sm-offset-0">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4 class="panel-head">博客目录(本页博客数量:{{blogs|length}})</h4>
+                </div>
+                <div class="panel-body">
+                    {% for i in blogs %}
+                        <div class="blog_content">
+                            <li class="read_title"><a href="blog{{i.id}}">{{i.title}}</a></li>
+                            <li class="read_num"><span class="glyphicon glyphicon-eye-open"></span>被阅读数({{ i.read_count|default:0}})</li>
+                            <p>{{i.text|truncatechars_html:80 |safe}}</p>
+                            <li class="type"><span class="glyphicon glyphicon-tags"></span>分类:<a href="type{{i.blog_type.pk}}">{{i.blog_type}}</a></li>
+                            <li class="author"><sapn class="glyphicon glyphicon-edit"></sapn>作者:{{i.auth_foreign}}</li>
+                        </div>
+                    {% empty %}
+                    <h3>--暂无博客--</h3>
+                    {%endfor%}
+                </div>
+            </div>
+             <nav aria-label="Page navigation" class="page_center">
+              <ul class="pagination ">
+                        <li><a href="./?page=1"><span>
+                            首页
+                        </span></a>
+                        </li>
+                      {%if now_page == 1 %}
+                          <li>
+                          <span aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                          </span>
+                          </li>
+                        {%else%}
+                            <li>
+                          <a href="./?page={{previous}}" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                          </a>
+                          </li>
+                      {%endif%}
+
+                  {%for page in page_range%}
+                      {%if page == now_page %}
+                          <li class="active"><a href="./?page={{page}}">{{page}}</a></li>
+                      {%else%}
+                          <li><a href="./?page={{page}}">{{page}}</a></li>
+                      {%endif%}
+                  {%endfor%}
+
+                  {%if now_page == last %}
+                      <li>
+                      <span aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                      </span>
+                      </li>
+                  {%else%}
+                        <li>
+                      <a href="./?page={{next}}" aria-label="Previous">
+                          <span aria-hidden="true">&raquo;</span>
+                      </a>
+                      </li>
+                  {%endif%}
+                  <li><a href="./?page={{last}}"><span>
+                            末页
+                        </span></a>
+                  </li>
+              </ul>
+            </nav>
+        </div>
+
+
+        <div class=" hidden-xs col-sm-3 col-lg-3">
+            <div class="panel panel-danger" >
+                <div class="panel-heading">
+                    博客分类
+                </div>
+                <div class="panel-body">
+                    <ul class="blog_type" >
+                        {%for type in types%}
+                            <li><a href="type{{type.id}}">{{type}}</a></li>
+                        {%empty%}
+                            <p>--此时暂无分类文章--</p>
+                        {%endfor%}
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+

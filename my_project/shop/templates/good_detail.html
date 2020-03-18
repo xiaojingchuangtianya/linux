@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品详情模板</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><!适应ie浏览器>
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!自适应布局>
+
+    <link rel="stylesheet" href="/static/css/show.css">
+    <script type="text/javascript" src="/static/js/heart.js"></script>
+    <script type="text/javascript" src="/static/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <script type="text/javascript" src="/static/js/heart.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <btn class="navbar-brand">小景网站</btn>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">闲置网站</a></li>
+                <li><a href="../web">博客目录</a></li>
+            </ul>
+        </div>
+    </div>
+
+<table boder="1" width="100%">
+    <caption style="background-color: #5bc0de">
+        表格标题栏
+    </caption>
+    <tr>
+        <td>名字</td>
+        <td>价钱</td>
+        <td>发布时间</td>
+        <td>详细介绍</td>
+    </tr>
+    <tr>
+        <td>{{good.name}}</td>
+        <td>{{good.price}}</td>
+        <td>{{good.date}}</td>
+        <td>{{good.description}}</td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,31 @@
+div.to_other li.lin_pre{
+    list-style-type: none;
+    display: block;
+    float: left;
+}
+div.to_other li.lin_next{
+    list-style-type: none;
+    display: block;
+    float: right;
+}
+h3.blog_title{
+    display: inline-block;
+}
+
+div.my_comment {
+    margin-top: 1em;
+    padding-top: 10px;
+    border-top: #d9edf7 solid 1px;
+}
+.comment-area{
+    width: 80%;
+}
+div.user{
+    position: relative;
+    margin-top: inherit;
+}
+div.comment{
+    padding: 0 0 0 0;
+}
+div.comments{
+}

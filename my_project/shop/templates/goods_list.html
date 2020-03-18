@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品表</title>
+</head>
+<body>
+
+<h1 style="text-align: center">所有商品列表</h1>
+<ul>
+    <h2>旧品</h2>
+    {% for i in old_goods %}
+    <li><a href="detail{{i.id}}">{{i.name}}</a></li>
+    {%endfor%}
+</ul>
+<ul>
+    <h2>书籍</h2>
+    {% for i in book %}
+    <li><a href="detail{{i.id}}">{{i.name}}</a></li>
+    {%endfor%}
+</ul>
+<ul>
+    <p>知识点交流</p>
+</ul>
+
+</body>
+</html>

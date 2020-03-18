@@ -1,0 +1,87 @@
+{%extends "base_extend.html"%}
+{%load staticfiles%}
+{%block title%}
+博客:{{blog.title}}--
+{%endblock%}
+
+{% block quote_js%}
+    <link rel="stylesheet" href="{% static 'blogWebsite/blog.css'%}">
+<script type="text/javascript" src="{%static 'ckeditor/ckeditor-init.js'%}"></script>
+<script type="text/javascript" src="{%static 'ckeditor/ckeditor/ckeditor.js'%}"></script>
+{% endblock %}
+
+{%block span %}
+<li><a href="../shop">闲置网站</a></li>
+<li ><a  href="../web">博客目录</a></li>
+{% endblock %}
+
+{%block search%}
+<form class="navbar-form navbar-left" role="search">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Search">
+  </div>
+  <button type="submit" class="btn btn-default">搜索</button>
+</form>
+     {% if user.is_authenticated %}
+    <li class="top-right"><a>{{user}},你好！</a></li>
+     <li class="top-right" ><a href="logout">退出</a></li>
+    {% else%}
+    <li class="top-right 11"><a href="./login">登录/注册</a></li><!到时放在最右边，用于显示登录这些状态>
+    {%endif%}
+{%endblock%}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 col-md-10">
+            <h3 class="blog_title"><b>{{blog.title}}&nbsp;&nbsp;</b></h3><span>(被阅读数:{{blog.read_count}})</span>
+            <p>{{blog.text|safe}}</p>
+            <p>分类：<a href="./type{{blog.blog_type.id}}">{{blog.blog_type}}</a></p>
+            <p>作者：{{blog.auth_foreign}}</p>
+            <p>创作时间：{{blog.create_time}}</p>
+            <div class="to_other">
+                {%if previous == None %}
+                    <li class="lin_pre">无上一篇</li>
+                {%else%}
+                    <li class="lin_pre">上一篇文章：<a href="./blog{{previous.id}}">{{previous}}</a></li>
+                {%endif%}
+
+                {%if next == None %}
+                    <li class="lin_next">无下一篇</li>
+                {%else%}
+                    <li class="lin_next">下一篇文章：<a href="./blog{{next.id}}">{{next}}</a></li>
+                {%endif%}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+            <div class="my_comment">
+                  {% if user.is_authenticated %}
+                    <div class="user col-xs-2 ">
+                      {{user}}
+                    </div>
+                    <div class="comment col-xs-10 ">
+
+                        <form action="{%url 'comment' %}" method="post">
+                            {% csrf_token %}
+                            {{form}}
+                            <input type="submit" value="提交">
+                        </form>
+                    </div>
+                  {%else%}
+                      <p>未登录，去<a href="./login">登陆 / 注册</a></p>
+                  {%endif%}
+            </div>
+    </div>
+            <div class="my_comment">
+                <p>这里是评论</p>
+                {%for i in comment%}
+                <div class="comments">{{i.author}}:{{i.comment}}  发表时间:{{i.edit_time|date:"Y-m-d H:m"}}</div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

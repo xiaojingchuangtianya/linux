@@ -1,0 +1,9 @@
+li{
+    list-style-type: none;
+}
+div.blog:not(:last-child){
+    border-bottom: 1px solid #d9edf7;
+}
+nav.page_center{
+    text-align: center;
+}

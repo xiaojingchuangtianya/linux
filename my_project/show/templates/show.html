@@ -1,0 +1,65 @@
+{% extends "base_extend.html"%}
+{% block title%}
+    --博客|首页--
+{% endblock %}
+
+{% block quote_js%}
+<script src="http://cdn.highcharts.com.cn/highcharts/highcharts.js"></script>
+<style type="text/css">
+    body{
+        text-align: center;
+    }
+    div.chart{
+        display: inline-block;
+    }
+</style>
+{% endblock %}
+
+{% block span %}
+    <li><a href="shop">购物网站</a></li>
+    <li class=><a href="web">博客目录</a></li>
+{% endblock %}
+
+{%block search%}
+     {% if user.is_authenticated %}
+    <li class="top-right"><a>{{user}},你好！</a></li>
+     <li class="top-right" ><a href="logout">退出</a></li>
+    {% else%}
+    <li class="top-right 11"><a href="#">登录/注册</a></li><!到时放在最右边，用于显示登录这些状态>
+    {%endif%}
+    {% endblock %}
+{% block content %}
+<div class="row">
+    <div id="container" class="chart col-lg-offset-3 col-lg-6 col-md"></div>
+    <div class="col-lg-3"></div>
+</div>
+    <script>
+        // 图表配置
+        var options = {
+            chart: {
+                type: 'line'                          //指定图表的类型，默认是折线图（line）
+            },
+            title: {
+                text: '访客流量变化表'                 // 标题
+            },
+            xAxis: {
+                categories: {{ date_list|safe }},  // x 轴分类
+            },
+            yAxis: {
+                title: {
+                    text: null                // y 轴标题
+                }
+            },
+            series: [{                              // 数据列
+                name: '访客数',                        // 数据列名
+                data: {{ num_list|safe }}             // 数据
+            }],
+            credits : {enabled :false},
+        };
+        // 图表初始化函数
+        var chart = Highcharts.chart('container', options);
+    </script>
+
+
+
+{% endblock %}

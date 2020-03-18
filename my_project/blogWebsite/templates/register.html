@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册界面</title>
+    <script type="text/javascript" src="/static/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <script type="text/javascript" src="/static/js/heart.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-offest-4 col-xs-4 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 col-lg-offset-4.5 col-lg-3.5">
+            <div class="panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-heading">注册</h3>
+                </div>
+
+                <div class="panel-body">
+                    <form action="register" method="post" novalidate autocomplete="off">
+                        {% csrf_token %}
+                        {%for reg in form%}
+                       <label for="{{reg.id_for_label}}">{{reg.label}}:</label>
+                       {{reg}}
+                       <p class="text-danger">{{reg.errors.as_text}}</p>
+                       {%endfor%}
+                        <div>
+                            <input type="submit" class="btn btn-success center-block" value="注册">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
