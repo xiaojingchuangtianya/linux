@@ -11,7 +11,7 @@
 {% endblock %}
 
 {%block span %}
-<li><a href="../shop">闲置网站</a></li>
+<li><a href="../shop">电影推荐</a></li>
 <li ><a  href="../web">博客目录</a></li>
 {% endblock %}
 
@@ -77,7 +77,7 @@
             <div class="my_comment">
                 <p>这里是评论</p>
                 {%for i in comment%}
-                <div class="comments">{{i.author}}:{{i.comment}}  发表时间:{{i.edit_time|date:"Y-m-d H:m"}}</div>
+                <div class="comments">{{i.author}}:{{i.comment| safe }}  发表时间:{{i.edit_time|date:"Y-m-d H:m"}}</div>
                 {%endfor%}
             </div>
         </div>
